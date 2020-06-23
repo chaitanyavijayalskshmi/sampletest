@@ -1,0 +1,126 @@
+package com.dyt.ors.screenpages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import com.dyt.generic.WebLibrary;
+import com.dyt.reports.Reporter;
+
+public class SubCategories extends WebLibrary{
+	
+	//Elements
+	
+	@FindBy(xpath="//span[text()='Dashboard']")
+	public static WebElement navlink_Dashboard;
+	
+	@FindBy(xpath="//span[text()='Products']")
+	public static WebElement navlink_Products;	
+	
+	@FindBy(xpath="//a[text()='Sub Categories']")
+	public static WebElement link_SubCategories;
+	
+	@FindBy(xpath="//a[@class='d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm']")
+	public static WebElement navlink_addSubCategories;
+	
+	@FindBy(xpath="//label[@for='orsMainCategories.ors_mc_id']")
+	public static WebElement text_selectMainCategories;
+	
+	@FindBy(xpath="//select[@id='mainCatgDropdown']")
+	public static WebElement dropdown_selectMainCategories;
+	
+	@FindBy(xpath="//label[@for='ors_sub_category_name']")
+	public static WebElement text_SubCategoryName;
+
+	@FindBy(xpath="//input[@id='subCatgName']")
+	public static WebElement edit_SubCategoryName ;
+	
+	@FindBy(xpath="//label[text()='Assigned order']")
+	public static WebElement text_assignedOrderName;
+
+	@FindBy(xpath="//select[@id='ors_sub_order']")
+	public static WebElement dropdown_assignedOrderName;
+	
+	@FindBy(xpath="//input[@id='LitImage']")
+	public static WebElement choosefile_UploadLiteratureImage;
+	
+	@FindBy(xpath="//input[@id='LitPDF']")
+	public static WebElement choosefile_UploadLiteratureDocument;
+	
+	@FindBy(xpath="//input[@value='Submit']")
+	public static WebElement btn_Submit;
+	
+//Methods
+//=======================================================================
+
+	public static void navSubCategories() {
+		boolean bStatus;
+		
+		bStatus = clickElement(navlink_Products);
+		Reporter.log(bStatus, "Products nav link clicked", "Products nav link not clicked");
+		
+		bStatus = clickElement(link_SubCategories);
+		Reporter.log(bStatus, "Sub Categories link clicked", "Sub Categories link not clicked");		
+	}
+	
+	//=======================================	
+	public static void navAddSubCategories() {
+		boolean bStatus;
+		
+		bStatus = clickElement(navlink_addSubCategories);
+		Reporter.log(bStatus, " Add Sub Categories nav link clicked", "Add Sub Categories nav link not clicked");
+		
+		bStatus = clickElement(dropdown_selectMainCategories);
+		Reporter.log(bStatus, "Select Main Categories dropdown clicked", "Select Main Categories dropdown not clicked");		
+	
+		bStatus = selectListItem(dropdown_selectMainCategories,"select");
+		Reporter.log(bStatus, "Main Categories is selected", "Main Categories is not selected");	
+	
+	}
+	//=====================================================================================
+	
+	public static void editSubCategoryName(String subcategoryName) {
+		boolean bStatus;
+		
+		bStatus = setEditValue(edit_SubCategoryName, subcategoryName);
+		Reporter.log(bStatus, "Sub Category name entered", "Sub Category name not entered");
+	
+	}
+	
+	//=============================================================================
+	
+	public static void selectAssignedOrder() {
+		boolean bStatus;
+		
+		bStatus = clickElement(dropdown_assignedOrderName);
+		Reporter.log(bStatus, "Assigned Order Name dropdown clicked", "Assigned Order Name dropdown not clicked");		
+		
+		bStatus = selectListItem(dropdown_assignedOrderName,"select");
+		Reporter.log(bStatus, "Assigned Order Name is selected", "Assigned Order Name is selected");	
+	
+	}
+	//============================================================================================
+	
+	public static void uploadLiteratureImage() {
+		boolean bStatus = true;
+		WebElement choosefile_UploadLiteratureImage = driver.findElement(By.id("//input[@id='LitImage']"));
+		choosefile_UploadLiteratureImage.sendKeys("path");
+		Reporter.log(bStatus, "Upload Literature Image file selected", "Upload Literature Image file not selected");		
+	}
+	//=========================================================================================================
+	public static void uploadLiteratureDocument() {
+		boolean bStatus = true;
+		WebElement choosefile_UploadLiteratureDocument = driver.findElement(By.id("//input[@id='LitPDF']"));
+		choosefile_UploadLiteratureDocument.sendKeys("path");
+		Reporter.log(bStatus, "Upload Literature Document file selected", "Upload Literature Document file not selected");	
+	}
+	//================================================================================================================
+	
+	public static void submit() {
+			boolean bStatus = true;	
+		
+		bStatus = clickElement(btn_Submit);
+		Reporter.log(bStatus, "Submit Button is clicked", "Submit Button is clicked");	
+	
+	}
+	
+}
